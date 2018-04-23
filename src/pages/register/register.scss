@@ -1,0 +1,17 @@
+page-register {
+
+    ion-list{
+        width: 50%;
+        margin: auto !important;
+        input {
+            outline: none !important;
+        }
+
+        button {
+            width: 25%;
+            // max-width: 20%;
+            margin-left: 14% !important;
+            position: absolute !important;
+        }
+    }
+}

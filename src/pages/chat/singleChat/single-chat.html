@@ -1,0 +1,47 @@
+<!-- Generated template for the SingleChatComponent component -->
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{user.dName||'Select User ... '}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content margin-top margin-bottom *ngIf="user.dName">
+  <!-- <ion-grid>
+    <ion-row *ngFor="let message of messages">
+      <ion-col col-9 *ngIf="message.userID !== socket.ioSocket.id" class="message">
+        <span>{{ message.chat }}</span>
+      </ion-col>
+      <ion-col offset-3 col-9 *ngIf="message.userID == socket.ioSocket.id" class="message">
+        <span>{{ message.chat }}</span>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+
+  <ion-card class="has-header mineMsg" [ngClass]="{mineMsg : message.userID === socket.ioSocket.id, senderMsg:message.userID !== socket.ioSocket.id}"
+    *ngFor="let message of messages">
+    <ion-card-content>
+      <span *ngIf="message.userID !== socket.ioSocket.id">{{ message.chat }}</span>
+      <span *ngIf="message.userID == socket.ioSocket.id">{{ message.chat }}</span>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>
+      <ion-textarea [(ngModel)]="textMsg" placeholder="type your message here.." (keypress)="keyPress($event)" clearInput=true
+        autocomplete="on" clearOnEdit=true autocorrect="on"></ion-textarea>
+
+      <ion-icon name="send" class="sendBtn" (click)="sendMessage()"></ion-icon>
+      <input type="file" ion-icon="md-attach" id="file" name="file" (change)="sendFile($event)" style="display: none;">
+      <label for="file">
+        <ion-icon name="attach"></ion-icon>
+      </label>
+
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

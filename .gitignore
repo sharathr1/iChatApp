@@ -1,0 +1,8 @@
+# ignore all logs
+*.log
+others/
+node_modules/
+.vscode/
+www/
+package-lock.json
+tsconfig.json
