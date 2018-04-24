@@ -28,11 +28,19 @@
       <span *ngIf="message.userID == socket.ioSocket.id">{{ message.chat }}</span>
     </ion-card-content>
   </ion-card>
+  <div ng2FileDrop class="custom-component-drop-zone" (ng2FileDropHoverStart)="dragFileOverStart()" (ng2FileDropHoverEnd)="dragFileOverEnd()"
+    (ng2FileDropFileAccepted)="dragFileAccepted($event)" (ng2FileDropFileRejected)="dragFileRejected($event)">
+  </div>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
     <ion-title>
+      <!--<angular-file-uploader [config]="afuConfig" [resetUpload]=resetVar (ApiResponse)="DocUpload($event)">
+      </angular-file-uploader>-->
+      <!--      <div ng2FileDrop class="custom-component-drop-zone"></div>
+-->
+
       <ion-textarea [(ngModel)]="textMsg" placeholder="type your message here.." (keypress)="keyPress($event)" clearInput=true
         autocomplete="on" clearOnEdit=true autocorrect="on"></ion-textarea>
 

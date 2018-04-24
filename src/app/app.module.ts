@@ -15,13 +15,16 @@ import { ChatPageModule } from "../pages/chat/chat.module";
 import { RegisterPageModule } from "../pages/register/register.module";
 import { AppRoutingModulePageModule } from "../pages/app-routing-module/app-routing-module.module";
 import { PageNotFoundPageModule } from "../pages/page-not-found/page-not-found.module";
-import { AppSettings } from "../common/constant";
+import { AppSettings } from '../common/constant';
 import { ChatPage } from '../pages/chat/mainChat/chat';
+import { FileUploadModule } from "angular-file-uploader";
+import { IDBStatic } from '../common/idb';
+import { Ng2FileDropModule } from 'ng2-file-drop';
 
 @NgModule({
   declarations: [MyApp],
   imports: [
-    BrowserModule,
+    BrowserModule, FileUploadModule, Ng2FileDropModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
     AppRoutingModulePageModule,

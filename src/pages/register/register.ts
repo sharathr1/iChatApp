@@ -20,8 +20,8 @@ import { AppSettings } from "../../common/constant";
 export class RegisterPage {
   name: String = "";
   email: String = "";
-  url = "http://3.209.196.136:9090/";
-  userName = localStorage.getItem("name");
+/*  url = "https://agile-wildwood-25315.herokuapp.com/";
+*/  userName = localStorage.getItem("name");
   userEmail = localStorage.getItem("email");
 
   constructor(
@@ -50,7 +50,7 @@ export class RegisterPage {
   registerUser() {
     this.navCtrl.push(ChatPage); // temp
     this.http
-      .post(this.url + "register", {
+      .post(AppSettings.url + "register", {
         dName: AppSettings.userName,
         email: AppSettings.userEmail,
         userID: this.socket.ioSocket.id

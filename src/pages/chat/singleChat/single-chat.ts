@@ -4,6 +4,7 @@ import { Socket } from "ng-socket-io";
 import { AppSettings } from "../../../common/constant";
 import { ChatPage } from '../mainChat/chat';
 import { ChatService } from '../chat-service';
+import { Ng2FileDropModule, Ng2FileDropAcceptedFile, Ng2FileDropRejectedFile } from 'ng2-file-drop';
 
 /**
  * Generated class for the SingleChatComponent component.
@@ -29,9 +30,26 @@ export class SingleChatComponent {
       this.user = data;
     }
   }
+  resetVar: boolean = false;
+  DocUpload(event) {
+    console.log("DocUpload  : ", event);
 
-
-
+  }
+  afuConfig = {
+    multiple: false,
+    formatsAllowed: ".jpg,.png,.zip,.doc,.docx,.txt,.js,.ts,html,.css,.scss,.java,.py,.r",
+    maxSize: "100",
+    uploadAPI: {
+      url: AppSettings.url + 'upload',
+      headers: {
+        "Content-Type": "text/plain;charset=UTF-8"
+      }
+    },
+    theme: "dragNDrop",
+    hideProgressBar: true,
+    hideResetBtn: true,
+    hideSelectBtn: true
+  };
   constructor(private http: HttpClient, private socket: Socket) {
     this.socket.on("newMsg", data => {
       console.log("receieve msg data : ", data);
@@ -112,4 +130,45 @@ export class SingleChatComponent {
   addMessage(data) {
     this.messages.push(data);
   }
+
+  // File being dragged has moved into the drop region
+  private dragFileOverStart() {
+    console.log("dragFileOverStart");
+
+  }
+
+  // File being dragged has moved out of the drop region
+  private dragFileOverEnd() {
+    console.log("dragFileOverEnd");
+
+  }
+
+  // File being dragged has been dropped and is valid
+  public dragFileAccepted(acceptedFile: Ng2FileDropAcceptedFile) {
+    console.log("dragFileAccepted acceptedFile ", acceptedFile);
+    console.log("dragFileAccepted ", acceptedFile.file);
+
+    var file = acceptedFile.file;
+    console.log("File name: " + file.name);
+    var fileupoload = {
+      userID: this.socket.ioSocket.id,
+      pairID: this.pairId,
+      dName: AppSettings.userName,
+      file: file,
+      filename: file.name
+    };
+    this.socket.emit("fileUpload", fileupoload);
+
+  }
+
+  // File being dragged has been dropped and has been rejected
+  private dragFileRejected(rejectedFile: Ng2FileDropRejectedFile) {
+    console.log("dragFileRejected");
+
+  }
+
+  // Files being dragged have been dropped.
+  /*  private dragFilesDropped(droppedFile: Ng2FileDropFilesDropped) {
+      console.log("dragFilesDropped");
+    }*/
 }
